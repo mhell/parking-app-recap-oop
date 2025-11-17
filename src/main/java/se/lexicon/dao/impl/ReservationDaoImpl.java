@@ -18,6 +18,12 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
     @Override
+    public Reservation create(Reservation reservation) {
+        reservations.add(reservation);
+        return reservation;
+    }
+
+    @Override
     public void update(Reservation reservation) {
         for (int i = 0; i < reservations.size(); i++) {
             if (reservations.get(i).getReservationId().equals(reservation.getReservationId())) {

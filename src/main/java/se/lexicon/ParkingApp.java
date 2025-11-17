@@ -1,10 +1,19 @@
 package se.lexicon;
 
+import se.lexicon.model.Customer;
+import se.lexicon.model.ParkingSpot;
+import se.lexicon.service.ParkingService;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class ParkingApp {
 
     // TODO: needs completions
+
+    ParkingService parkingService = new ParkingService();
 
     public void start() {
         boolean running = true;
@@ -34,24 +43,52 @@ public class ParkingApp {
 
 
     private void registerCustomer() {
-
+        String name = getInput("Enter full name ");
+        String phoneNumber = getInput("Enter phone number ");
+        String plateNumber = getInput("Enter plate number ");
+        Customer customer = parkingService.registerCustomer(name, phoneNumber, plateNumber);
+        System.out.println("Successfully registered customer: " + customer);
     }
 
     private void displayParkingSpots() {
-
+        List<ParkingSpot> parkingSpots = parkingService.getAllParkingSpots();
+        System.out.println("Parking spots: ");
+        for (ParkingSpot parkingSpot : parkingSpots) {
+            System.out.println(parkingSpot);
+        }
     }
 
     private void reserveParkingSpot() {
-
+        try {
+            Customer customer = parkingService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
+            LocalDateTime startTime = LocalDateTime.parse(getInput("Enter start date (e.g. 2007-12-03T10:15:30: "));
+            LocalDateTime endTime = LocalDateTime.parse(getInput("Enter start date (e.g. 2007-12-03T10:15:30: "));
+            Integer areaCode = Integer.parseInt(getInput("Enter area code "));
+            Integer spotNumber = Integer.parseInt(getInput("Enter spot number "));
+            ParkingSpot parkingSpot = parkingService.reserveSpot(customer, startTime, endTime, areaCode, spotNumber);
+            System.out.println("Successfully reserved parking spot " + parkingSpot);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private void vacateParkingSpot() {
-
+        try {
+            Customer customer = parkingService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
+            parkingService.vacate(customer);
+            System.out.println("Successfully vacated parking spot for customer: " + customer);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private String getInput(String prompt) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(prompt);
+        System.out.print(prompt);
         return scanner.nextLine();
+    }
+
+    public static void main(String[] args) {
+        new ParkingApp().start();
     }
 }

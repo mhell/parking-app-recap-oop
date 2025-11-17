@@ -2,6 +2,8 @@ package se.lexicon.model;
 
 import se.lexicon.dao.sequencer.CustomerIdSequencer;
 
+import java.util.Objects;
+
 /**
  * Represents a customer who uses the parking reservation system.
  * <p>
@@ -71,5 +73,17 @@ public class Customer {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", vehiclePlateNumber='" + vehiclePlateNumber + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Customer customer = (Customer) o;
+        return Objects.equals(id, customer.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

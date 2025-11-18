@@ -12,7 +12,6 @@ public class Reservation {
     private ParkingSpot parkingSpot;
     private Customer customer;
 
-
     public Reservation(LocalDateTime startTime, LocalDateTime endTime, Status status, ParkingSpot parkingSpot, Customer customer) {
         this.reservationId = UUID.randomUUID().toString();
         setStartTime(startTime);
@@ -21,7 +20,6 @@ public class Reservation {
         setParkingSpot(parkingSpot);
         setCustomer(customer);
     }
-
 
     public void setReservationId(String reservationId) {
         this.reservationId = UUID.randomUUID().toString();
@@ -35,7 +33,6 @@ public class Reservation {
         if (startTime == null) {
             throw new IllegalArgumentException("Start time cannot be null");
         }
-
         this.startTime = startTime;
     }
 
@@ -47,7 +44,6 @@ public class Reservation {
         if (endTime == null) {
             throw new IllegalArgumentException("End time cannot be null");
         }
-
         this.endTime = endTime;
     }
 
@@ -59,7 +55,6 @@ public class Reservation {
         if (status == null) {
             throw new IllegalArgumentException("Status cannot be null");
         }
-
         this.status = status;
     }
 
@@ -71,7 +66,6 @@ public class Reservation {
         if (parkingSpot == null) {
             throw new IllegalArgumentException("Parking spot cannot be null");
         }
-
         this.parkingSpot = parkingSpot;
     }
 
@@ -85,9 +79,6 @@ public class Reservation {
         }
         this.customer = customer;
     }
-
-
-
 
     @Override
     public String toString() {
@@ -104,7 +95,6 @@ public class Reservation {
     public void complete() {
         this.status = Status.COMPLETED;
     }
-
 
     public void setEndTimeByHours(int hours) {
         if (startTime != null) {

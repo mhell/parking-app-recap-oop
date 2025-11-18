@@ -14,7 +14,7 @@ public class Reservation {
 
 
     public Reservation(String reservationId, LocalDateTime startTime, LocalDateTime endTime, Status status, ParkingSpot parkingSpot, Customer customer) {
-        this.reservationId = reservationId;
+        this.reservationId = UUID.randomUUID().toString();
         this.startTime = startTime;
         this.endTime = endTime;
         this.status = status;
@@ -68,7 +68,6 @@ public class Reservation {
     }
 
 
-    // TODO: Add toString() if needed
 
 
     @Override

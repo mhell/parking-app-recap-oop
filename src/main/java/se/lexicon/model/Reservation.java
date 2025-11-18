@@ -35,6 +35,7 @@ public class Reservation {
         if (startTime == null) {
             throw new IllegalArgumentException("Start time cannot be null");
         }
+
         this.startTime = startTime;
     }
 
@@ -46,6 +47,7 @@ public class Reservation {
         if (endTime == null) {
             throw new IllegalArgumentException("End time cannot be null");
         }
+
         this.endTime = endTime;
     }
 
@@ -57,6 +59,7 @@ public class Reservation {
         if (status == null) {
             throw new IllegalArgumentException("Status cannot be null");
         }
+
         this.status = status;
     }
 
@@ -68,6 +71,7 @@ public class Reservation {
         if (parkingSpot == null) {
             throw new IllegalArgumentException("Parking spot cannot be null");
         }
+
         this.parkingSpot = parkingSpot;
     }
 

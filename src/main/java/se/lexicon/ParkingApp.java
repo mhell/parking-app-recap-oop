@@ -14,6 +14,7 @@ public class ParkingApp {
     CustomerService costumerService = new CustomerService();
     ParkingService parkingService = new ParkingService();
     ReservationService reservationService = new ReservationService();
+    VacateService vacateService = new VacateService();
 
     public void start() {
         boolean running = true;
@@ -75,7 +76,7 @@ public class ParkingApp {
     private void vacateParkingSpot() {
         try {
             Customer customer = costumerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
-            reservationService.vacate(customer);
+            vacateService.vacateSpot(customer);
             System.out.println("Successfully vacated parking spot for customer: " + customer);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

@@ -34,4 +34,9 @@ public class ReservationDaoImpl implements ReservationDao {
         throw new IllegalArgumentException("Reservation not found: " + reservation.getReservationId());
     }
 
+    @Override
+    public List<Reservation> findAll() {
+        return reservations;
+    }
+
 }

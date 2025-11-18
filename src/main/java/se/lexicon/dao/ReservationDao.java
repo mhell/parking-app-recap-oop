@@ -2,6 +2,7 @@ package se.lexicon.dao;
 
 import se.lexicon.model.Reservation;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ReservationDao {
@@ -10,4 +11,6 @@ public interface ReservationDao {
     Optional<Reservation> findById(String reservationId);
 
     void update(Reservation reservation);
+
+    List<Reservation> findAll();
 }

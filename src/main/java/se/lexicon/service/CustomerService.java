@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public class CustomerService {
     CustomerDao customerDao = new CustomerDaoImpl();
-    ParkingSpotDao parkingSpotDao = new ParkingSpotDaoImpl();
-    ReservationDao reservationDao = new ReservationDaoImpl();
 
     public Customer registerCustomer(String name, String phoneNumber, String plateNumber) {
         try {
@@ -23,20 +21,8 @@ public class CustomerService {
         return null;
     }
 
-    public List<ParkingSpot> getAllParkingSpots() {
-        return parkingSpotDao.findAll();
-    }
-
     public Customer getCustomer(int id) {
         Optional<Customer> customer = customerDao.findById(id);
         return customer.orElseThrow();
-    }
-
-    public ParkingSpot reserveSpot(Customer customer, LocalDateTime startTime, LocalDateTime endTime, Integer areaCode, Integer spotNumber) {
-        return null;
-    }
-
-    public void vacate(Customer customer) {
-
     }
 }

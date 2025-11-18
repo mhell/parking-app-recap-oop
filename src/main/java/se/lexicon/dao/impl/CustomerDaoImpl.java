@@ -4,13 +4,13 @@ package se.lexicon.dao.impl;
 import se.lexicon.dao.CustomerDao;
 import se.lexicon.model.Customer;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 public class CustomerDaoImpl implements CustomerDao {
 
-    private List<Customer> customers = new ArrayList<>();
+    private List<Customer> final customers = new LinkedList<>();
 
 
     @Override

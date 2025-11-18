@@ -2,13 +2,13 @@ package se.lexicon.dao.impl;
 import se.lexicon.dao.ReservationDao;
 import se.lexicon.model.Reservation;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 public class ReservationDaoImpl implements ReservationDao {
 
-    private final List<Reservation> reservations = new ArrayList<>();
+    private final List<Reservation> reservations = new LinkedList<>();
 
     @Override
     public Optional<Reservation> findById(String reservationID) {

@@ -4,8 +4,6 @@ import se.lexicon.dao.*;
 import se.lexicon.dao.impl.*;
 import se.lexicon.model.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 public class CustomerService {

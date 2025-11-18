@@ -3,7 +3,6 @@ package se.lexicon;
 import se.lexicon.model.*;
 import se.lexicon.service.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 

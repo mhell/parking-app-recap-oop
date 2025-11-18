@@ -3,9 +3,6 @@ package se.lexicon.service;
 import se.lexicon.dao.*;
 import se.lexicon.model.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 public class ReservationService {
     ReservationDao reservationDao;
     ParkingSpotDao parkingSpotDao;

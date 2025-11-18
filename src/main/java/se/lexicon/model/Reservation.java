@@ -22,6 +22,15 @@ public class Reservation {
         setCustomer(customer);
     }
 
+    public Reservation(int duration, Status status, ParkingSpot parkingSpot, Customer customer) {
+        this.reservationId = UUID.randomUUID().toString();
+        setStartTime(LocalDateTime.now());
+        setEndTimeByHours(duration);
+        setStatus(status);
+        setParkingSpot(parkingSpot);
+        setCustomer(customer);
+    }
+
     public String getReservationId() {
         return reservationId;
     }

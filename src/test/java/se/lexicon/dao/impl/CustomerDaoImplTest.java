@@ -115,7 +115,8 @@ class CustomerDaoImplTest {
      * - Delete a customer from the DAO.
      * - Verify the customer is no longer retrievable.
      */
- /*   @Test
+    /*
+    @Test
     void shouldDeleteCustomerSuccessfully() {
         // TODO: Arrange, Act, Assert
     }

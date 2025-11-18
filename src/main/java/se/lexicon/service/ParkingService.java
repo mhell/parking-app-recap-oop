@@ -12,7 +12,6 @@ import java.util.Optional;
 public class ParkingService {
     private final ParkingSpotDao parkingSpotDao;
 
-
     public ParkingService() {
          parkingSpotDao=new ParkingSpotDaoImpl();
          parkingSpotDao.create(new ParkingSpot(1,101,false));
@@ -21,7 +20,6 @@ public class ParkingService {
     }
 
     public List<ParkingSpot> getAllParkingSpots() {
-
         return parkingSpotDao.findAll();
     }
 

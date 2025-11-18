@@ -3,7 +3,6 @@ package se.lexicon.dao.impl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.lexicon.model.Customer;
-import se.lexicon.dao.impl.CustomerDaoImpl;
 
 import java.util.Optional;
 

@@ -1,5 +1,7 @@
 package se.lexicon.model;
 
+import java.util.Objects;
+
 /**
  * Represents a physical parking spot in the parking area.
  * <p>
@@ -11,8 +13,8 @@ package se.lexicon.model;
  */
 public class ParkingSpot {
 
-    private Integer spotNumber;
-    private Integer areaCode;
+    private int spotNumber;
+    private int areaCode;
     private boolean occupied;
 
     //Add constructors
@@ -75,5 +77,18 @@ public class ParkingSpot {
         if(occupied){
             occupied=false;
         }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ParkingSpot that = (ParkingSpot) o;
+        return Objects.equals(spotNumber, that.spotNumber) && Objects.equals(areaCode, that.areaCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(spotNumber, areaCode);
     }
 }

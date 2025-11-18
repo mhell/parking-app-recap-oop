@@ -51,6 +51,7 @@ public class ParkingSpotDaoImpl implements ParkingSpotDao {
             if(spot.getSpotNumber() == parkingSpot.getSpotNumber() && spot.getAreaCode()== parkingSpot.getAreaCode()){
                 spot.setOccupied(parkingSpot.isOccupied());
                 return;
+
             }
         }
     }

@@ -13,13 +13,13 @@ public class Reservation {
     private Customer customer;
 
 
-    public Reservation(String reservationId, LocalDateTime startTime, LocalDateTime endTime, Status status, ParkingSpot parkingSpot, Customer customer) {
+    public Reservation(LocalDateTime startTime, LocalDateTime endTime, Status status, ParkingSpot parkingSpot, Customer customer) {
         this.reservationId = UUID.randomUUID().toString();
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.status = status;
-        this.parkingSpot = parkingSpot;
-        this.customer = customer;
+        setStartTime(startTime);
+        setEndTime(endTime);
+        setStatus(status);
+        setParkingSpot(parkingSpot);
+        setCustomer(customer);
     }
 
 
@@ -32,6 +32,9 @@ public class Reservation {
     }
 
     public void setStartTime(LocalDateTime startTime) {
+        if (startTime == null) {
+            throw new IllegalArgumentException("Start time cannot be null");
+        }
         this.startTime = startTime;
     }
 
@@ -40,6 +43,9 @@ public class Reservation {
     }
 
     public void setEndTime(LocalDateTime endTime) {
+        if (endTime == null) {
+            throw new IllegalArgumentException("End time cannot be null");
+        }
         this.endTime = endTime;
     }
 
@@ -48,6 +54,9 @@ public class Reservation {
     }
 
     public void setStatus(Status status) {
+        if (status == null) {
+            throw new IllegalArgumentException("Status cannot be null");
+        }
         this.status = status;
     }
 
@@ -56,6 +65,9 @@ public class Reservation {
     }
 
     public void setParkingSpot(ParkingSpot parkingSpot) {
+        if (parkingSpot == null) {
+            throw new IllegalArgumentException("Parking spot cannot be null");
+        }
         this.parkingSpot = parkingSpot;
     }
 
@@ -64,6 +76,9 @@ public class Reservation {
     }
 
     public void setCustomer(Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer cannot be null");
+        }
         this.customer = customer;
     }
 

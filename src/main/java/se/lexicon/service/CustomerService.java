@@ -9,7 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class CustomerService {
-    CustomerDao customerDao = new CustomerDaoImpl();
+    CustomerDao customerDao;
+
+    public CustomerService(CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
 
     public Customer registerCustomer(String name, String phoneNumber, String plateNumber) {
         try {

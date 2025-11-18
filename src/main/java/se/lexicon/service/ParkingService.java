@@ -12,8 +12,8 @@ import java.util.Optional;
 public class ParkingService {
     private final ParkingSpotDao parkingSpotDao;
 
-    public ParkingService() {
-         parkingSpotDao=new ParkingSpotDaoImpl();
+    public ParkingService(ParkingSpotDao parkingSpotDao) {
+         this.parkingSpotDao = parkingSpotDao;
          parkingSpotDao.create(new ParkingSpot(1,101,false));
          parkingSpotDao.create(new ParkingSpot(2,102,false));
          parkingSpotDao.create(new ParkingSpot(3,103,false));

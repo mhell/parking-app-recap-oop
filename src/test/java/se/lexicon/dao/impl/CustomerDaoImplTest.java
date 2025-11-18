@@ -4,8 +4,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.lexicon.model.Customer;
 import se.lexicon.dao.impl.CustomerDaoImpl;
+
 import java.util.Optional;
+
 import se.lexicon.dao.sequencer.CustomerIdSequencer;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -91,7 +94,20 @@ class CustomerDaoImplTest {
      */
     @Test
     void shouldFindCustomerById() {
-        // TODO: Arrange, Act, Assert
+        // Arrange
+        Customer customer = new Customer("Bob", "777777", "BBC111");
+        customerDao.create(customer);
+
+        // Act
+        Optional<Customer> result = customerDao.findById(customer.getId());
+
+        // Assert
+        assertTrue(result.isPresent());
+        assertEquals(customer, result.get());
+
+        // Also test missing ID
+        Optional<Customer> notFound = customerDao.findById(999);
+        assertTrue(notFound.isEmpty());
     }
 
     /**
@@ -99,8 +115,9 @@ class CustomerDaoImplTest {
      * - Delete a customer from the DAO.
      * - Verify the customer is no longer retrievable.
      */
-    @Test
+ /*   @Test
     void shouldDeleteCustomerSuccessfully() {
         // TODO: Arrange, Act, Assert
     }
+    */
 }

@@ -25,9 +25,9 @@ public class Customer {
 
     public Customer(String name, String phoneNumber, String vehiclePlateNumber) {
         this.id = CustomerIdSequencer.nextId();
-        this.name = name;
-        this.phoneNumber = phoneNumber;
-        this.vehiclePlateNumber = vehiclePlateNumber;
+        setName(name);
+        setPhoneNumber(phoneNumber);
+        setVehiclePlateNumber(vehiclePlateNumber);
     }
 
 
@@ -42,6 +42,9 @@ public class Customer {
     }
 
     public void setName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
         this.name = name;
     }
 
@@ -50,6 +53,9 @@ public class Customer {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        if (phoneNumber == null || phoneNumber.isBlank()) {
+            throw new IllegalArgumentException("Phone number cannot be null or empty");
+        }
         this.phoneNumber = phoneNumber;
     }
 
@@ -58,6 +64,9 @@ public class Customer {
     }
 
     public void setVehiclePlateNumber(String vehiclePlateNumber) {
+        if (vehiclePlateNumber == null || vehiclePlateNumber.isBlank()) {
+            throw new IllegalArgumentException("Vehicle plate number cannot be null or empty");
+        }
         this.vehiclePlateNumber = vehiclePlateNumber;
     }
 

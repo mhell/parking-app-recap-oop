@@ -19,26 +19,26 @@ public class ParkingSpot {
 
     //Add constructors
 
-    public ParkingSpot(Integer spotNumber, Integer areaCode, boolean occupied) {
+    public ParkingSpot(int spotNumber, int areaCode, boolean occupied) {
         this.spotNumber = spotNumber;
         this.areaCode = areaCode;
         this.occupied = occupied;
     }
 
 
-    public Integer getSpotNumber() {
+    public int getSpotNumber() {
         return spotNumber;
     }
 
-    public void setSpotNumber(Integer spotNumber) {
+    public void setSpotNumber(int spotNumber) {
         this.spotNumber = spotNumber;
     }
 
-    public Integer getAreaCode() {
+    public int getAreaCode() {
         return areaCode;
     }
 
-    public void setAreaCode(Integer areaCode) {
+    public void setAreaCode(int areaCode) {
         this.areaCode = areaCode;
     }
 

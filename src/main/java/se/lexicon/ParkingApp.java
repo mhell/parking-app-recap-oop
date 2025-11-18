@@ -62,7 +62,7 @@ public class ParkingApp {
         try {
             Customer customer = costumerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
             LocalDateTime startTime = LocalDateTime.parse(getInput("Enter start date (e.g. 2007-12-03T10:15:30: "));
-            LocalDateTime endTime = LocalDateTime.parse(getInput("Enter start date (e.g. 2007-12-03T10:15:30: "));
+            LocalDateTime endTime = LocalDateTime.parse(getInput("Enter end date (e.g. 2007-12-03T10:15:30: "));
             Integer areaCode = Integer.parseInt(getInput("Enter area code "));
             Integer spotNumber = Integer.parseInt(getInput("Enter spot number "));
             ParkingSpot parkingSpot = reservationService.reserveSpot(customer, startTime, endTime, areaCode, spotNumber);

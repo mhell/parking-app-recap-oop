@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public class CustomerDaoImpl implements CustomerDao {
 
-    private final List<Customer>  customers = new LinkedList<>();
+    private final List<Customer> customers = new LinkedList<>();
 
     @Override
     public Customer create(Customer customer) {

@@ -10,5 +10,8 @@ public class CustomerIdSequencer {
         return ++currentId;
     }
 
+    public static void reset() {
+        currentId = 0;
+    }
 
 }

@@ -2,6 +2,11 @@ package se.lexicon.dao.impl;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import se.lexicon.model.Customer;
+import se.lexicon.dao.impl.CustomerDaoImpl;
+import java.util.Optional;
+import se.lexicon.dao.sequencer.CustomerIdSequencer;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test suite for CustomerDaoImpl.
@@ -13,7 +18,7 @@ import org.junit.jupiter.api.Test;
  */
 class CustomerDaoImplTest {
 
-    private CustomerDaoImpl testObject;
+    private CustomerDaoImpl customerDao;
 
     /**
      * Runs before each test.
@@ -22,6 +27,9 @@ class CustomerDaoImplTest {
      */
     @BeforeEach
     void setUp() {
+        customerDao = new CustomerDaoImpl();
+        CustomerIdSequencer.reset();
+
         // TODO: Initialize testObject before each test
     }
 
@@ -32,7 +40,22 @@ class CustomerDaoImplTest {
      */
     @Test
     void shouldCreateAndStoreCustomerSuccessfully() {
-        // TODO: Arrange, Act, Assert
+
+        // Arrange
+        Customer customer = new Customer("Alex", "123456", "ABC123");
+
+        // Act
+        Customer created = customerDao.create(customer);
+
+        // Assert
+        assertNotNull(created);
+        assertEquals(customer, created);
+        assertTrue(created.getId() > 0);
+
+        Optional<Customer> result = customerDao.findById(created.getId());
+        assertTrue(result.isPresent());
+        assertEquals(customer, result.get());
+
     }
 
     /**
@@ -42,7 +65,22 @@ class CustomerDaoImplTest {
      */
     @Test
     void shouldReturnAllCustomers() {
-        // TODO: Arrange, Act, Assert
+
+        // Arrange
+        Customer customer = new Customer("Bob", "777777", "BBC111");
+        customerDao.create(customer);
+
+        // Act
+        Optional<Customer> result = customerDao.findById(customer.getId());
+
+        // Assert
+        assertTrue(result.isPresent());
+        assertEquals(customer, result.get());
+
+        // Also test a nonexisting ID
+        Optional<Customer> emptyResult = customerDao.findById(999);
+        assertTrue(emptyResult.isEmpty());
+
     }
 
     /**

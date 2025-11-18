@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class Reservation {
 
-    private String reservationId;
+    private final String reservationId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Status status;
@@ -21,8 +21,8 @@ public class Reservation {
         setCustomer(customer);
     }
 
-    public void setReservationId(String reservationId) {
-        this.reservationId = UUID.randomUUID().toString();
+    public String getReservationId() {
+        return reservationId;
     }
 
     public LocalDateTime getStartTime() {

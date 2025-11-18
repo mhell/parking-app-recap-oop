@@ -1,6 +1,7 @@
 package se.lexicon.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Reservation {
@@ -90,6 +91,18 @@ public class Reservation {
                 ", parkingSpot=" + parkingSpot +
                 ", customer=" + customer +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return Objects.equals(getReservationId(), that.getReservationId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getReservationId());
     }
 
     public void complete() {

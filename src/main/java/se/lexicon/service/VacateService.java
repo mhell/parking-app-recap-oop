@@ -11,5 +11,10 @@ public class VacateService {
     }
 
     public void vacateSpot(Customer customer) {
+        // find reservation made by customer
+
+        // set associated parking spot to unoccupied
+
+        // update reservation to status COMPLETED
     }
 }

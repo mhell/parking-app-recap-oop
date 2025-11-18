@@ -1,5 +1,7 @@
 package se.lexicon.model;
 
+import java.util.Objects;
+
 /**
  * Represents a physical parking spot in the parking area.
  * <p>
@@ -11,22 +13,60 @@ package se.lexicon.model;
  */
 public class ParkingSpot {
 
-    private Integer spotNumber;
-    private Integer areaCode;
+    private int spotNumber;
+    private int areaCode;
     private boolean occupied;
 
-    // TODO: Add constructors
+    //Add constructors
 
-    // TODO: Add getters and setters
+    public ParkingSpot(Integer spotNumber, Integer areaCode, boolean occupied) {
+        this.spotNumber = spotNumber;
+        this.areaCode = areaCode;
+        this.occupied = occupied;
+    }
 
-    // TODO: Add toString() if needed
+
+    public Integer getSpotNumber() {
+        return spotNumber;
+    }
+
+    public void setSpotNumber(Integer spotNumber) {
+        this.spotNumber = spotNumber;
+    }
+
+    public Integer getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(Integer areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public boolean isOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(boolean occupied) {
+        this.occupied = occupied;
+    }
+
+    @Override
+    public String toString() {
+        return "ParkingSpot{" +
+                "spotNumber=" + spotNumber +
+                ", areaCode=" + areaCode +
+                ", occupied=" + occupied +
+                '}';
+    }
 
     /**
      * Marks the parking spot as occupied.
      * This method sets the `occupied` field to true.
      */
     public void occupy() {
-        // TODO: Implement by setting occupied to true
+        if(!occupied){
+            occupied=true;
+        }
     }
 
     /**
@@ -34,6 +74,21 @@ public class ParkingSpot {
      * This method sets the `occupied` field to false.
      */
     public void vacate() {
-        // TODO: Implement by setting occupied to false
+        if(occupied){
+            occupied=false;
+        }
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ParkingSpot that = (ParkingSpot) o;
+        return Objects.equals(spotNumber, that.spotNumber) && Objects.equals(areaCode, that.areaCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(spotNumber, areaCode);
     }
 }

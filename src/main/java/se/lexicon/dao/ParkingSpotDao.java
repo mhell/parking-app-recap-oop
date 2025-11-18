@@ -12,7 +12,7 @@ public interface ParkingSpotDao {
 
     List<ParkingSpot> findAll();
 
-    Optional<ParkingSpot> findBySpotNumber(Integer spotNumber);
+    Optional<ParkingSpot> findBySpotNumber(int spotNumber);
 
     List<ParkingSpot> findAvailableSpots();
 

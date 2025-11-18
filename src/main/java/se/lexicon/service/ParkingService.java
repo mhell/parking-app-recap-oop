@@ -20,6 +20,7 @@ public class ParkingService {
         } catch (RuntimeException e) {
             System.out.println("Error: " + e.getMessage());
         }
+        return null;
     }
 
     public List<ParkingSpot> getAllParkingSpots() {

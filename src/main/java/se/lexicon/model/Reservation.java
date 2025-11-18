@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
  */
 public class Reservation {
 
+    public String getReservationId() {
+        return reservationId;
+    } // Needed by ReservationDaoImpl to look up reservations by id
+
     private String reservationId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;

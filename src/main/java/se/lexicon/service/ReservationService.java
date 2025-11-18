@@ -19,13 +19,12 @@ public class ReservationService {
         if (parkingSpot == null) {
             throw new IllegalArgumentException("Parking spot is not available");
         }
-
         // check if customer already has a parking lot reserved
         if (reservationDao.findAll().stream().anyMatch( reservation ->
                 reservation.getCustomer().equals(customer))) {
             throw new IllegalArgumentException("Costumer has an existing reservation.");
         }
-
+        parkingSpot.setOccupied(true);
         return reservationDao.create(new Reservation(duration, Status.ACTIVE, parkingSpot, customer));
     }
 }

@@ -7,14 +7,21 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
+// TODO: needs completions
+
 public class ParkingApp {
+    CustomerService customerService;
+    ParkingService parkingService;
+    ReservationService reservationService;
+    VacateService vacateService;
 
-    // TODO: needs completions
-
-    CustomerService costumerService = new CustomerService();
-    ParkingService parkingService = new ParkingService();
-    ReservationService reservationService = new ReservationService();
-    VacateService vacateService = new VacateService();
+    public ParkingApp(CustomerService customerService, ParkingService parkingService,
+                      ReservationService reservationService, VacateService vacateService) {
+        this.customerService = customerService;
+        this.parkingService = parkingService;
+        this.reservationService = reservationService;
+        this.vacateService = vacateService;
+    }
 
     public void start() {
         boolean running = true;
@@ -44,10 +51,10 @@ public class ParkingApp {
 
 
     private void registerCustomer() {
-        String name = getInput("Enter full name ");
-        String phoneNumber = getInput("Enter phone number ");
-        String plateNumber = getInput("Enter plate number ");
-        Customer customer = costumerService.registerCustomer(name, phoneNumber, plateNumber);
+        String name = getInput("Enter full name: ");
+        String phoneNumber = getInput("Enter phone number: ");
+        String plateNumber = getInput("Enter plate number: ");
+        Customer customer = customerService.registerCustomer(name, phoneNumber, plateNumber);
         System.out.println("Successfully registered customer: " + customer);
     }
 
@@ -61,7 +68,7 @@ public class ParkingApp {
 
     private void reserveParkingSpot() {
         try {
-            Customer customer = costumerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
+            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
             LocalDateTime startTime = LocalDateTime.parse(getInput("Enter start date (e.g. 2007-12-03T10:15:30: "));
             LocalDateTime endTime = LocalDateTime.parse(getInput("Enter end date (e.g. 2007-12-03T10:15:30: "));
             Integer areaCode = Integer.parseInt(getInput("Enter area code "));
@@ -75,7 +82,7 @@ public class ParkingApp {
 
     private void vacateParkingSpot() {
         try {
-            Customer customer = costumerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
+            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
             vacateService.vacateSpot(customer);
             System.out.println("Successfully vacated parking spot for customer: " + customer);
         } catch (Exception e) {
@@ -87,9 +94,5 @@ public class ParkingApp {
         Scanner scanner = new Scanner(System.in);
         System.out.print(prompt);
         return scanner.nextLine();
-    }
-
-    public static void main(String[] args) {
-        new ParkingApp().start();
     }
 }

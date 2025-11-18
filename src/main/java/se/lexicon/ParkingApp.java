@@ -68,13 +68,12 @@ public class ParkingApp {
 
     private void reserveParkingSpot() {
         try {
-            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
-            LocalDateTime startTime = LocalDateTime.parse(getInput("Enter start date (e.g. 2007-12-03T10:15:30: "));
-            LocalDateTime endTime = LocalDateTime.parse(getInput("Enter end date (e.g. 2007-12-03T10:15:30: "));
-            Integer areaCode = Integer.parseInt(getInput("Enter area code "));
-            Integer spotNumber = Integer.parseInt(getInput("Enter spot number "));
-            ParkingSpot parkingSpot = reservationService.reserveSpot(customer, startTime, endTime, areaCode, spotNumber);
-            System.out.println("Successfully reserved parking spot " + parkingSpot);
+            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id: ")));
+            int duration = Integer.parseInt(getInput("Enter duration: "));
+            int areaCode = Integer.parseInt(getInput("Enter area code: "));
+            int spotNumber = Integer.parseInt(getInput("Enter spot number: "));
+            Reservation reservation = reservationService.reserveSpot(customer, duration, areaCode, spotNumber);
+            System.out.println("Successfully made reservation: " + reservation);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
@@ -82,7 +81,7 @@ public class ParkingApp {
 
     private void vacateParkingSpot() {
         try {
-            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id  ")));
+            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id: ")));
             vacateService.vacateSpot(customer);
             System.out.println("Successfully vacated parking spot for customer: " + customer);
         } catch (Exception e) {

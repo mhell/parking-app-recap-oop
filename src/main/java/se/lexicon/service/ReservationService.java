@@ -4,6 +4,7 @@ import se.lexicon.dao.*;
 import se.lexicon.model.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class ReservationService {
     ReservationDao reservationDao;
@@ -14,18 +15,20 @@ public class ReservationService {
         this.parkingSpotDao = parkingSpotDao;
     }
 
-    public ParkingSpot reserveSpot(Customer customer, LocalDateTime startTime, LocalDateTime endTime, Integer areaCode, Integer spotNumber) {
-        // check if parking spot is available
-        if (parkingSpotDao.findBySpotNumber(spotNumber).isPresent()) {
-            throw new IllegalArgumentException("Parking spot taken");
+    public Reservation reserveSpot(Customer customer, int duration, int areaCode, Integer spotNumber) {
+        // check if parking spot is available (
+        ParkingSpot parkingSpot = parkingSpotDao.findAvailableSpots().stream().filter(spot ->
+                spot.getSpotNumber() == spotNumber && spot.getAreaCode() == areaCode).findFirst().orElse(null);
+        if (parkingSpot == null) {
+            throw new IllegalArgumentException("Parking spot is not available");
         }
 
         // check if customer already has a parking lot reserved
-        if (reservationDao.findAll().stream().anyMatch( reservation ->  reservation.getCustomer().equals(customer))) {
-
+        if (reservationDao.findAll().stream().anyMatch( reservation ->
+                reservation.getCustomer().equals(customer))) {
+            throw new IllegalArgumentException("Costumer has an existing reservation.");
         }
 
-
-        return null;
+        return reservationDao.create(new Reservation(duration, Status.ACTIVE, parkingSpot, customer));
     }
 }

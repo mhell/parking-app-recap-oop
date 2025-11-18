@@ -27,7 +27,7 @@ public class ParkingSpotDaoImpl implements ParkingSpotDao {
     @Override
     public Optional<ParkingSpot> findBySpotNumber(int spotNumber) {
         for(ParkingSpot parkingSpot: parkingSpots){
-            if(parkingSpot.getSpotNumber().equals(spotNumber)){
+            if(parkingSpot.getSpotNumber()==spotNumber){
                 return Optional.of(parkingSpot);
             }
         }
@@ -48,7 +48,7 @@ public class ParkingSpotDaoImpl implements ParkingSpotDao {
     @Override
     public void update(ParkingSpot parkingSpot) {
         for(ParkingSpot spot:parkingSpots){
-            if(spot.getSpotNumber().equals(parkingSpot.getSpotNumber()) && spot.getAreaCode().equals(parkingSpot.getAreaCode())){
+            if(spot.getSpotNumber() == parkingSpot.getSpotNumber() && spot.getAreaCode()== parkingSpot.getAreaCode()){
                 spot.setOccupied(parkingSpot.isOccupied());
                 return;
             }

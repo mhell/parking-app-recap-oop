@@ -9,7 +9,6 @@ import se.lexicon.model.ParkingSpot;
 import se.lexicon.model.Reservation;
 import se.lexicon.model.Status;
 
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,8 +25,7 @@ public class VacateServiceTest {
     private Reservation createReservation(int area, int spot, boolean occupied) {
         Customer c = new Customer("John", "070-1111111", "ABC123");
         ParkingSpot ps = new ParkingSpot(spot, area, occupied);
-        LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = start.plusHours(2);
+
         return new Reservation(2, Status.ACTIVE, ps, c);
     }
     @Test

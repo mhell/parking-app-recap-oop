@@ -80,9 +80,10 @@ public class ParkingApp {
 
     private void vacateParkingSpot() {
         try {
-            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id: ")));
-            vacateService.vacateSpot(customer);
-            System.out.println("Successfully vacated parking spot for customer: " + customer);
+            int areaCode = Integer.parseInt(getInput("Enter area code: "));
+            int spotNumber = Integer.parseInt(getInput("Enter spot number: "));
+            Reservation reservation = vacateService.vacateSpot(areaCode, spotNumber);
+            System.out.println("Successfully vacated parking spot " + spotNumber + " with area code: " + areaCode +  " " + reservation);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }

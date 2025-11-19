@@ -24,7 +24,7 @@ public class Main {
 
         CustomerService costumerService = new CustomerService(customerDao);
         ParkingService parkingService = new ParkingService(parkingSpotDao);
-        ReservationService reservationService = new ReservationService(reservationDao, parkingSpotDao);
+        ReservationService reservationService = new ReservationService(customerDao, reservationDao, parkingSpotDao);
         VacateService vacateService = new VacateService(reservationDao);
 
         new ParkingApp(costumerService, parkingService, reservationService, vacateService).start();

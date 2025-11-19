@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,6 +21,23 @@ class ReservationTest {
         end = start.plusHours(2);
         reservation = new Reservation(start, end, Status.ACTIVE, parkingSpot, customer);
     }
+    @Test
+    void constructor_shouldGenerateUUID() {
+        assertNotNull(reservation);
+        assertNotNull(reservation.toString());
+        assertNotEquals("", reservation.toString());
+    }
+    @Test
+    void getStartTime() {
+        assertEquals(start, reservation.getStartTime());
+    }
+    @Test
+    void setStartTime() {
+        LocalDateTime newStart = start.plusHours(2);
+        reservation.setStartTime(newStart);
+        assertEquals(newStart, reservation.getStartTime());
+    }
+
 
     @Test
     void getEndTime() {

@@ -6,7 +6,6 @@ import se.lexicon.dao.ReservationDao;
 import se.lexicon.dao.impl.CustomerDaoImpl;
 import se.lexicon.dao.impl.ParkingSpotDaoImpl;
 import se.lexicon.dao.impl.ReservationDaoImpl;
-import se.lexicon.model.ParkingSpot;
 import se.lexicon.service.CustomerService;
 import se.lexicon.service.ParkingService;
 import se.lexicon.service.ReservationService;
@@ -17,10 +16,6 @@ public class Main {
         CustomerDao customerDao = new CustomerDaoImpl();
         ParkingSpotDao parkingSpotDao = new ParkingSpotDaoImpl();
         ReservationDao reservationDao = new ReservationDaoImpl();
-
-        parkingSpotDao.create(new ParkingSpot(1,101,false));
-        parkingSpotDao.create(new ParkingSpot(2,102,false));
-        parkingSpotDao.create(new ParkingSpot(3,103,false));
 
         CustomerService costumerService = new CustomerService(customerDao);
         ParkingService parkingService = new ParkingService(parkingSpotDao);

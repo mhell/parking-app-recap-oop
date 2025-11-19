@@ -37,7 +37,7 @@ class ReservationServiceTest {
         ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
         parkingSpotDao.create(parkingSpot);
         // Act
-        Reservation reservation = reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Reservation reservation = reservationService.reserveSpot(customer.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Assert
         assertEquals(Status.ACTIVE, reservation.getStatus());
     }
@@ -52,9 +52,9 @@ class ReservationServiceTest {
         customerDao.create(customer1);
         Customer customer2 = new Customer("name2", "456", "DEF");
         customerDao.create(customer2);
-        reservationService.reserveSpot(customer1, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        reservationService.reserveSpot(customer1.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Act
-        Executable action = () -> reservationService.reserveSpot(customer2, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Executable action = () -> reservationService.reserveSpot(customer2.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Assert
         assertThrows(IllegalArgumentException.class, action, "Should throw when parking spot taken.");
     }
@@ -67,7 +67,7 @@ class ReservationServiceTest {
         ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
         parkingSpotDao.create(parkingSpot);
         // Act
-        Executable action = () -> reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Executable action = () -> reservationService.reserveSpot(customer.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Assert
         assertThrows(NoSuchElementException.class, action, "Should throw when customer don't exist.");
     }
@@ -80,9 +80,9 @@ class ReservationServiceTest {
         parkingSpotDao.create(parkingSpot);
         Customer customer = new Customer("name", "123", "ABC");
         customerDao.create(customer);
-        reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        reservationService.reserveSpot(customer.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Act
-        Executable action = () -> reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Executable action = () -> reservationService.reserveSpot(customer.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Assert
         assertThrows(IllegalArgumentException.class, action, "Should throw when customer have an active reservation.");
     }
@@ -95,7 +95,7 @@ class ReservationServiceTest {
         Customer customer = new Customer("name", "123", "ABC");
         customerDao.create(customer);
         // Act
-        Executable action = () -> reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Executable action = () -> reservationService.reserveSpot(customer.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Assert
         assertThrows(IllegalArgumentException.class, action, "Should throw when parking spot don't exist.");
     }
@@ -110,7 +110,7 @@ class ReservationServiceTest {
         parkingSpotDao.create(parkingSpot);
         int duration = 0;
         // Act
-        Executable action = () -> reservationService.reserveSpot(customer, duration, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Executable action = () -> reservationService.reserveSpot(customer.getId(), duration, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Assert
         assertThrows(IllegalArgumentException.class, action, "Should throw when duration < 1.");
     }

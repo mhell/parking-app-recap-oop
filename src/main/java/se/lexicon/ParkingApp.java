@@ -67,11 +67,11 @@ public class ParkingApp {
 
     private void reserveParkingSpot() {
         try {
-            Customer customer = customerService.getCustomer(Integer.parseInt(getInput("Enter costumer id: ")));
+            int customerId = Integer.parseInt(getInput("Enter customer id: "));
             int duration = Integer.parseInt(getInput("Enter duration (hours): "));
             int areaCode = Integer.parseInt(getInput("Enter area code: "));
             int spotNumber = Integer.parseInt(getInput("Enter spot number: "));
-            Reservation reservation = reservationService.reserveSpot(customer, duration, areaCode, spotNumber);
+            Reservation reservation = reservationService.reserveSpot(customerId, duration, areaCode, spotNumber);
             System.out.println("Successfully made reservation: " + reservation);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

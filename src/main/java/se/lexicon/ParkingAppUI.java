@@ -1,14 +1,8 @@
 package se.lexicon;
 
-import se.lexicon.dao.CustomerDao;
-import se.lexicon.dao.ParkingSpotDao;
-import se.lexicon.dao.ReservationDao;
-import se.lexicon.dao.impl.CustomerDaoImpl;
-import se.lexicon.dao.impl.ParkingSpotDaoImpl;
-import se.lexicon.dao.impl.ReservationDaoImpl;
+
 import se.lexicon.model.Customer;
 import se.lexicon.model.ParkingSpot;
-import se.lexicon.model.Reservation;
 import se.lexicon.service.CustomerService;
 import se.lexicon.service.ParkingService;
 import se.lexicon.service.ReservationService;
@@ -17,9 +11,7 @@ import se.lexicon.service.VacateService;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
 public class ParkingAppUI {
     private JFrame jFrame;

@@ -24,7 +24,6 @@ class CustomerServiceTest {
     }
 
     class FakeCustomerDao implements CustomerDao {
-
         private Customer storedCustomer;
 
         @Override
@@ -79,7 +78,6 @@ class CustomerServiceTest {
         // Arrange
         Customer stored = new Customer("Alex", "123456", "ABC123");
         fakeCustomerDao.create(stored);   // manually store customer in fake DAO
-
         int id = stored.getId();
 
         // Act

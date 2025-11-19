@@ -16,7 +16,6 @@ class CustomerTest {
 
     private Customer testObject;
 
-
     /**
      * Runs before each test method.
      * Scenario:

@@ -4,21 +4,31 @@ import se.lexicon.dao.*;
 import se.lexicon.model.*;
 
 public class ReservationService {
+    CustomerDao customerDao;
     ReservationDao reservationDao;
     ParkingSpotDao parkingSpotDao;
 
-    public ReservationService(ReservationDao reservationDao, ParkingSpotDao parkingSpotDao) {
+    public ReservationService(CustomerDao customerDao, ReservationDao reservationDao, ParkingSpotDao parkingSpotDao) {
+        this.customerDao = customerDao;
         this.reservationDao = reservationDao;
         this.parkingSpotDao = parkingSpotDao;
     }
 
     public Reservation reserveSpot(Customer customer, int duration, int areaCode, Integer spotNumber) {
+        // check if duration is > 0
+        if (duration < 1) {
+            throw new IllegalArgumentException("Duration must be a positive value");
+        }
+
         // check if parking spot is available (
         ParkingSpot parkingSpot = parkingSpotDao.findAvailableSpots().stream().filter(spot ->
                 spot.getSpotNumber() == spotNumber && spot.getAreaCode() == areaCode).findFirst().orElse(null);
         if (parkingSpot == null) {
             throw new IllegalArgumentException("Parking spot is not available");
         }
+        // Check if customer exists
+        customerDao.findById(customer.getId()).orElseThrow();
+
         // check if customer already has a parking lot reserved
         if (reservationDao.findAll().stream().anyMatch( reservation ->
                 reservation.getCustomer().equals(customer))) {

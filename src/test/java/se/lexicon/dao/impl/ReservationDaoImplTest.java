@@ -8,7 +8,6 @@ import se.lexicon.model.ParkingSpot;
 import se.lexicon.model.Reservation;
 import se.lexicon.model.Status;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,13 +90,12 @@ class ReservationDaoImplTest {
         assertThrows(IllegalArgumentException.class, () -> testObject.update(notStored), "Updating non-existing reservation should throw exception");
     }
 
-
     private Reservation createSampleReservation() {
         Customer customer = new Customer("John Doe", "070-1111111", "ABC123");
         ParkingSpot parkingSpot = new ParkingSpot(1, 99, false);
         int duration = 2;
 
-        return new Reservation(2, Status.ACTIVE, parkingSpot, customer);
+        return new Reservation(duration, Status.ACTIVE, parkingSpot, customer);
     }
 
     private Reservation createAnotherReservation() {

@@ -66,16 +66,52 @@ class ReservationServiceTest {
         Customer customer = new Customer("name", "123", "ABC");
         ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
         parkingSpotDao.create(parkingSpot);
-        int duration = 1;
         // Act
-        Executable action = () -> reservationService.reserveSpot(customer, duration, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Executable action = () -> reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
         // Assert
         assertThrows(NoSuchElementException.class, action, "Should throw when customer don't exist.");
     }
 
     // customer already made reservation
+    @Test
+    void shouldThrow_whenCustomerHaveActiveReservation() {
+        // Arrange
+        ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
+        parkingSpotDao.create(parkingSpot);
+        Customer customer = new Customer("name", "123", "ABC");
+        customerDao.create(customer);
+        reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        // Act
+        Executable action = () -> reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        // Assert
+        assertThrows(IllegalArgumentException.class, action, "Should throw when customer have an active reservation.");
+    }
 
-    // non-existing spot
+    // non-existing parking spot
+    @Test
+    void shouldThrow_whenNonExistingSpot() {
+        // Arrange
+        ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
+        Customer customer = new Customer("name", "123", "ABC");
+        customerDao.create(customer);
+        // Act
+        Executable action = () -> reservationService.reserveSpot(customer, 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        // Assert
+        assertThrows(IllegalArgumentException.class, action, "Should throw when parking spot don't exist.");
+    }
 
     // 0 or negative duration
+    @Test
+    void shouldThrow_whenNonPositiveDuration() {
+        // Arrange
+        Customer customer = new Customer("name", "123", "ABC");
+        customerDao.create(customer);
+        ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
+        parkingSpotDao.create(parkingSpot);
+        int duration = 0;
+        // Act
+        Executable action = () -> reservationService.reserveSpot(customer, duration, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        // Assert
+        assertThrows(IllegalArgumentException.class, action, "Should throw when duration < 1.");
+    }
 }

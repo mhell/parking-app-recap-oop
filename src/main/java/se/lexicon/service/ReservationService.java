@@ -15,6 +15,11 @@ public class ReservationService {
     }
 
     public Reservation reserveSpot(Customer customer, int duration, int areaCode, Integer spotNumber) {
+        // check if duration is > 0
+        if (duration < 1) {
+            throw new IllegalArgumentException("Duration must be a positive value");
+        }
+
         // check if parking spot is available (
         ParkingSpot parkingSpot = parkingSpotDao.findAvailableSpots().stream().filter(spot ->
                 spot.getSpotNumber() == spotNumber && spot.getAreaCode() == areaCode).findFirst().orElse(null);

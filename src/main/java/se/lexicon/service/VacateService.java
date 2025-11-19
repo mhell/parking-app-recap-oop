@@ -17,7 +17,7 @@ public class VacateService {
                 findFirst().orElse(null);
 
         if (reservation == null) {
-            throw new IllegalArgumentException("Parking spot does not exist.");
+            throw new IllegalArgumentException("Parking spot is not taken or does not exist.");
         } else if (!reservation.getParkingSpot().isOccupied()) {
             throw new IllegalArgumentException("Parking spot is not occupied.");
         }

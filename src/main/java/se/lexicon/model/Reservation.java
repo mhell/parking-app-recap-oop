@@ -13,14 +13,6 @@ public class Reservation {
     private ParkingSpot parkingSpot;
     private Customer customer;
 
-    public Reservation(LocalDateTime startTime, LocalDateTime endTime, Status status, ParkingSpot parkingSpot, Customer customer) {
-        this.reservationId = UUID.randomUUID().toString();
-        setStartTime(startTime);
-        setEndTime(endTime);
-        setStatus(status);
-        setParkingSpot(parkingSpot);
-        setCustomer(customer);
-    }
 
     public Reservation(int duration, Status status, ParkingSpot parkingSpot, Customer customer) {
         this.reservationId = UUID.randomUUID().toString();

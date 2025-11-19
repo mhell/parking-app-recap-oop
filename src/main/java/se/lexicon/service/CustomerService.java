@@ -14,13 +14,8 @@ public class CustomerService {
     }
 
     public Customer registerCustomer(String name, String phoneNumber, String plateNumber) {
-        try {
-            Customer customer = new Customer(name, phoneNumber, plateNumber);
-            return customerDao.create(customer);
-        } catch (RuntimeException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-        return null;
+        Customer customer = new Customer(name, phoneNumber, plateNumber);
+        return customerDao.create(customer);
     }
 
     public Customer getCustomer(int id) {

@@ -48,13 +48,16 @@ public class ParkingApp {
         }
     }
 
-
     private void registerCustomer() {
-        String name = getInput("Enter full name: ");
-        String phoneNumber = getInput("Enter phone number: ");
-        String plateNumber = getInput("Enter plate number: ");
-        Customer customer = customerService.registerCustomer(name, phoneNumber, plateNumber);
-        System.out.println("Successfully registered customer: " + customer);
+        try {
+            String name = getInput("Enter full name: ");
+            String phoneNumber = getInput("Enter phone number: ");
+            String plateNumber = getInput("Enter plate number: ");
+            Customer customer = customerService.registerCustomer(name, phoneNumber, plateNumber);
+            System.out.println("Successfully registered customer: " + customer);
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     private void displayParkingSpots() {

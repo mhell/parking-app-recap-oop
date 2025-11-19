@@ -16,5 +16,4 @@ public class ParkingService {
     public List<ParkingSpot> getAllParkingSpots() {
         return parkingSpotDao.findAll();
     }
-
 }

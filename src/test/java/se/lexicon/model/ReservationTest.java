@@ -17,10 +17,10 @@ class ReservationTest {
 
     @BeforeEach
     void setUp() {
-        start = LocalDateTime.now();
-        end = start.plusHours(2);
-        reservation = new Reservation(start, end, Status.ACTIVE, parkingSpot, customer);
+        int duration = 2;
+        reservation = new Reservation(duration, Status.ACTIVE, parkingSpot, customer);
     }
+
     @Test
     void constructor_shouldGenerateUUID() {
         assertNotNull(reservation);

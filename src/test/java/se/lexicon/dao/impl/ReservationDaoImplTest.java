@@ -88,30 +88,23 @@ class ReservationDaoImplTest {
     void update_shouldThrowExceptionWhenNotFound() {
         Reservation notStored = createSampleReservation();
 
-        assertThrows(IllegalArgumentException.class,
-                () -> testObject.update(notStored),
-                "Updating non-existing reservation should throw exception");
+        assertThrows(IllegalArgumentException.class, () -> testObject.update(notStored), "Updating non-existing reservation should throw exception");
     }
-
 
 
     private Reservation createSampleReservation() {
         Customer customer = new Customer("John Doe", "070-1111111", "ABC123");
         ParkingSpot parkingSpot = new ParkingSpot(1, 99, false);
+        int duration = 2;
 
-        LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = start.plusHours(2);
-
-        return new Reservation(start, end, Status.ACTIVE, parkingSpot, customer);
+        return new Reservation(2, Status.ACTIVE, parkingSpot, customer);
     }
 
     private Reservation createAnotherReservation() {
         Customer customer = new Customer("Jane Doe", "073-2222222", "XYZ789");
         ParkingSpot parkingSpot = new ParkingSpot(2, 88, false);
+        int duration = 2;
 
-        LocalDateTime start = LocalDateTime.now().plusHours(1);
-        LocalDateTime end = start.plusHours(4);
-
-        return new Reservation(start, end, Status.ACTIVE, parkingSpot, customer);
+        return new Reservation(duration, Status.ACTIVE, parkingSpot, customer);
     }
 }

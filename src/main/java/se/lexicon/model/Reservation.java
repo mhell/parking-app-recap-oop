@@ -13,7 +13,6 @@ public class Reservation {
     private ParkingSpot parkingSpot;
     private Customer customer;
 
-
     public Reservation(int duration, Status status, ParkingSpot parkingSpot, Customer customer) {
         this.reservationId = UUID.randomUUID().toString();
         setStartTime(LocalDateTime.now());

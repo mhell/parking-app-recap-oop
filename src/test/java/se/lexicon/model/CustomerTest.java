@@ -3,6 +3,8 @@ package se.lexicon.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Test class for the Customer model.
  * <p>
@@ -14,6 +16,7 @@ class CustomerTest {
 
     private Customer testObject;
 
+
     /**
      * Runs before each test method.
      * Scenario:
@@ -21,7 +24,7 @@ class CustomerTest {
      */
     @BeforeEach
     void setUp() {
-        // TODO: Initialize testObject with a default Customer instance
+        testObject = new Customer("Alex", "123456", "ABC123");
     }
 
     /**
@@ -31,7 +34,20 @@ class CustomerTest {
      */
     @Test
     void shouldCreateCustomerSuccessfully() {
-        // TODO: Arrange, Act, Assert
+        // Arrange
+        String name = "Bob";
+        String phone = "777777";
+        String plate = "XYZ111";
+
+        // Act
+        Customer customer = new Customer(name, phone, plate);
+
+        // Assert
+        assertNotNull(customer);
+        assertEquals(name, customer.getName());
+        assertEquals(phone, customer.getPhoneNumber());
+        assertEquals(plate, customer.getVehiclePlateNumber());
+        assertTrue(customer.getId() > 0);
     }
 
     /**
@@ -41,7 +57,14 @@ class CustomerTest {
      */
     @Test
     void shouldSetNameWhenNameIsValid() {
-        // TODO: Arrange, Act, Assert
+        // Arrange
+        String newName = "Charlie";
+
+        // Act
+        testObject.setName(newName);
+
+        // Assert
+        assertEquals(newName, testObject.getName());
     }
 
     /**
@@ -51,7 +74,13 @@ class CustomerTest {
      */
     @Test
     void shouldNotSetNameWhenNameIsInvalid() {
-        // TODO: Arrange, Act, Assert
+        // Arrange
+        String invalidName1 = null;
+        String invalidName2 = "   ";
+
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> testObject.setName(invalidName1));
+        assertThrows(IllegalArgumentException.class, () -> testObject.setName(invalidName2));
     }
 
     /**
@@ -61,7 +90,14 @@ class CustomerTest {
      */
     @Test
     void shouldSetPhoneNumberWhenValid() {
-        // TODO: Arrange, Act, Assert
+        // Arrange
+        String newPhone = "99999999";
+
+        // Act
+        testObject.setPhoneNumber(newPhone);
+
+        // Assert
+        assertEquals(newPhone, testObject.getPhoneNumber());
     }
 
     /**
@@ -71,17 +107,13 @@ class CustomerTest {
      */
     @Test
     void shouldNotSetPhoneNumberWhenInvalid() {
-        // TODO: Arrange, Act, Assert
-    }
+        // Arrange
+        String invalidphone1 = null;
+        String invalidphone2 = "";
 
-    /**
-     * Scenario:
-     * - Assign a valid ID to the customer (e.g., positive number).
-     * - Ensure the ID is updated correctly.
-     */
-    @Test
-    void shouldSetIdWhenValid() {
-        // TODO: Arrange, Act, Assert
+        // Act & Assert
+        assertThrows(IllegalArgumentException.class, () -> testObject.setPhoneNumber(invalidphone1));
+        assertThrows(IllegalArgumentException.class, () -> testObject.setPhoneNumber(invalidphone2));
     }
 
     /**
@@ -91,6 +123,13 @@ class CustomerTest {
      */
     @Test
     void shouldSetVehiclePlateNumberSuccessfully() {
-        // TODO: Arrange, Act, Assert
+        // Arrange
+        String newPlate = "ABC123";
+
+        // Act
+        testObject.setVehiclePlateNumber(newPlate);
+
+        // Assert
+        assertEquals(newPlate, testObject.getVehiclePlateNumber());
     }
 }

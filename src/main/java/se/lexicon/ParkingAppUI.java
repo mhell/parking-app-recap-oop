@@ -27,19 +27,13 @@ public class ParkingAppUI {
     ParkingService parkingService;
     ReservationService reservationService;
     VacateService vacateService;
-    CustomerDao customerDao = new CustomerDaoImpl();
-    ParkingSpotDao parkingSpotDao=new ParkingSpotDaoImpl();
-    ReservationDao reservationDao=new ReservationDaoImpl();
 
-    public ParkingAppUI(){
-
-        this.customerService=new CustomerService(customerDao);
-        this.parkingService=new ParkingService(parkingSpotDao);
-        this.reservationService=new ReservationService(reservationDao,parkingSpotDao);
-        this.vacateService=new VacateService(reservationDao);
-        parkingSpotDao.create(new ParkingSpot(1,101,false));
-        parkingSpotDao.create(new ParkingSpot(2,102,false));
-        parkingSpotDao.create(new ParkingSpot(3,103,false));
+    public ParkingAppUI(CustomerService costumerService, ParkingService parkingService,
+                        ReservationService reservationService, VacateService vacateService) {
+        this.customerService=costumerService;
+        this.parkingService=parkingService;
+        this.reservationService=reservationService;
+        this.vacateService=vacateService;
         initializeUI();
     }
 
@@ -105,10 +99,6 @@ public class ParkingAppUI {
             Customer customer=customerService.registerCustomer(name, phoneNumber, plateNumber);
             JOptionPane.showMessageDialog(jFrame,"The Customer has been registered.The Customer Id : "+customer.getId());
         }
-
-
-
-
     }
 
     private void displayParkingSpots() {
@@ -154,16 +144,13 @@ public class ParkingAppUI {
                     int duration = Integer.parseInt(durationField.getText());
                     int areaCode = Integer.parseInt(areaCodeField.getText());
                     int spotNumber = Integer.parseInt(spotNumberField.getText());
-                    reservationService.reserveSpot(customer, duration, areaCode, spotNumber);
+                    reservationService.reserveSpot(customer.getId(), duration, areaCode, spotNumber);
                     JOptionPane.showMessageDialog(jFrame,"The Spot has been reserved successfully");
                 }
                 catch(Exception ex){
                     JOptionPane.showMessageDialog(jFrame,ex.getMessage());
                 }
             }
-
-
-
     }
 
     private void vacateParkingSpot() {
@@ -188,8 +175,5 @@ public class ParkingAppUI {
                 JOptionPane.showMessageDialog(jFrame,e.getMessage());
             }
         }
-
     }
-
-
 }

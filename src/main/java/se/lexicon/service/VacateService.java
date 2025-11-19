@@ -1,10 +1,8 @@
 package se.lexicon.service;
 
 import se.lexicon.dao.ReservationDao;
-import se.lexicon.model.Customer;
 import se.lexicon.model.ParkingSpot;
 import se.lexicon.model.Reservation;
-import se.lexicon.model.Status;
 
 public class VacateService {
     ReservationDao reservationDao;

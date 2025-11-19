@@ -114,4 +114,20 @@ class ReservationServiceTest {
         // Assert
         assertThrows(IllegalArgumentException.class, action, "Should throw when duration < 1.");
     }
+
+    @Test
+    void shouldReserveSuccessfully_whenCostumerVacatePrevious() {
+        // Arrange
+        Customer customer = new Customer("name", "123", "ABC");
+        customerDao.create(customer);
+        ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
+        parkingSpotDao.create(parkingSpot);
+        reservationService.reserveSpot(customer.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        VacateService vacateService = new VacateService(reservationDao);
+        // Act
+        vacateService.vacateSpot(parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        Reservation reservation = reservationService.reserveSpot(customer.getId(), 1, parkingSpot.getAreaCode(), parkingSpot.getSpotNumber());
+        // Assert
+        assertEquals(Status.ACTIVE, reservation.getStatus());
+    }
 }

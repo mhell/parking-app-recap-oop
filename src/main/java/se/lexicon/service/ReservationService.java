@@ -28,7 +28,7 @@ public class ReservationService {
         }
         // check if customer already has a parking lot reserved
         if (reservationDao.findAll().stream().anyMatch( reservation ->
-                reservation.getCustomer().equals(customer))) {
+                reservation.getCustomer().equals(customer) && reservation.getStatus() == Status.ACTIVE)) {
             throw new IllegalArgumentException("Costumer has an existing reservation.");
         }
         // check if parking spot is available (

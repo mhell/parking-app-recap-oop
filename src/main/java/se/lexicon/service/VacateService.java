@@ -2,6 +2,7 @@ package se.lexicon.service;
 
 import se.lexicon.dao.ReservationDao;
 import se.lexicon.model.Reservation;
+import se.lexicon.model.Status;
 
 public class VacateService {
     ReservationDao reservationDao;
@@ -13,7 +14,7 @@ public class VacateService {
     public Reservation vacateSpot(int areaCode, int spotNumber) {
         // find reservation with area code and spot number
         Reservation reservation = reservationDao.findAll().stream().filter( res ->
-                res.getParkingSpot().getAreaCode() == areaCode && res.getParkingSpot().getSpotNumber() == spotNumber).
+                res.getParkingSpot().getAreaCode() == areaCode && res.getParkingSpot().getSpotNumber() == spotNumber && res.getStatus() == Status.ACTIVE).
                 findFirst().orElse(null);
 
         if (reservation == null) {

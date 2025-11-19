@@ -10,56 +10,70 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReservationTest {
     private Reservation reservation;
-    private LocalDateTime start;
-    private LocalDateTime end;
-    private ParkingSpot parkingSpot;
     private Customer customer;
-
+    private ParkingSpot parkingSpot;
+    private int durationHours = 3;
     @BeforeEach
     void setUp() {
-        int duration = 2;
-        reservation = new Reservation(duration, Status.ACTIVE, parkingSpot, customer);
+        customer = new Customer("Test User", "0700000000", "ABC123");
+        parkingSpot = new ParkingSpot(1, 10, false);
+
+        reservation = new Reservation(durationHours, Status.ACTIVE, parkingSpot, customer);
     }
 
     @Test
-    void constructor_shouldGenerateUUID() {
-        assertNotNull(reservation);
-        assertNotNull(reservation.toString());
-        assertNotEquals("", reservation.toString());
-    }
-    @Test
-    void getStartTime() {
-        assertEquals(start, reservation.getStartTime());
-    }
-    @Test
-    void setStartTime() {
-        LocalDateTime newStart = start.plusHours(2);
-        reservation.setStartTime(newStart);
-        assertEquals(newStart, reservation.getStartTime());
+    void constructor_shouldSetStartTime() {
+        assertNotNull(reservation.getStartTime());
     }
 
+    @Test
+    void constructor_shouldSetEndTimeCorrectly() {
+        LocalDateTime expected = reservation.getStartTime().plusHours(durationHours);
+        assertEquals(expected, reservation.getEndTime());
+    }
+
+    @Test
+    void constructor_shouldSetStatus() {
+        assertEquals(Status.ACTIVE, reservation.getStatus());
+    }
+
+    @Test
+    void constructor_shouldSetParkingSpot() {
+        assertEquals(parkingSpot, reservation.getParkingSpot());
+    }
+
+    @Test
+    void constructor_shouldSetCustomer() {
+        assertEquals(customer, reservation.getCustomer());
+    }
+
+    @Test
+    void constructor_shouldGenerateReservationId() {
+        assertNotNull(reservation.getReservationId());
+        assertFalse(reservation.getReservationId().isEmpty());
+    }
 
     @Test
     void getEndTime() {
-        assertEquals(end, reservation.getEndTime());
+        assertEquals(reservation.getStartTime().plusHours(durationHours), reservation.getEndTime());
     }
 
     @Test
     void setEndTime() {
-        LocalDateTime newEnd = start.plusHours(5);
+        LocalDateTime newEnd = reservation.getStartTime().plusHours(5);
         reservation.setEndTime(newEnd);
         assertEquals(newEnd, reservation.getEndTime());
     }
 
     @Test
-    void complete() {
+    void complete_shouldChangeStatusToCompleted() {
         reservation.complete();
         assertEquals(Status.COMPLETED, reservation.getStatus());
     }
 
     @Test
     void setEndTimeByHours() {
-        reservation.setEndTimeByHours(3);
-        assertEquals(start.plusHours(3), reservation.getEndTime());
+        reservation.setEndTimeByHours(6);
+        assertEquals(reservation.getStartTime().plusHours(6), reservation.getEndTime());
     }
 }

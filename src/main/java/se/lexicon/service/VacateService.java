@@ -1,7 +1,6 @@
 package se.lexicon.service;
 
 import se.lexicon.dao.ReservationDao;
-import se.lexicon.model.ParkingSpot;
 import se.lexicon.model.Reservation;
 
 public class VacateService {
@@ -14,7 +13,8 @@ public class VacateService {
     public Reservation vacateSpot(int areaCode, int spotNumber) {
         // find reservation with area code and spot number
         Reservation reservation = reservationDao.findAll().stream().filter( res ->
-                res.getParkingSpot().equals(new ParkingSpot(spotNumber, areaCode, true))).findFirst().orElse(null);
+                res.getParkingSpot().getAreaCode() == areaCode && res.getParkingSpot().getSpotNumber() == spotNumber).
+                findFirst().orElse(null);
 
         if (reservation == null) {
             throw new IllegalArgumentException("Parking spot does not exist.");

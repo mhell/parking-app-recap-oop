@@ -2,6 +2,7 @@ package se.lexicon.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import se.lexicon.dao.CustomerDao;
 import se.lexicon.dao.sequencer.CustomerIdSequencer;
 import se.lexicon.model.Customer;
@@ -67,10 +68,10 @@ class CustomerServiceTest {
         String plate = "ABC123";
 
         // Act
-        Customer result = customerService.registerCustomer(invalidName, phone, plate);
+        Executable result = () -> customerService.registerCustomer(invalidName, phone, plate);
 
         // Assert
-        assertNull(result);
+        assertThrows(IllegalArgumentException.class, result);
     }
 
     @Test

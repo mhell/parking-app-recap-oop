@@ -12,13 +12,13 @@ public class VacateService {
     }
 
     public Reservation vacateSpot(int areaCode, int spotNumber) {
-        // find reservation with area code and spot number
+        // find active reservation with area code and spot number
         Reservation reservation = reservationDao.findAll().stream().filter( res ->
                 res.getParkingSpot().getAreaCode() == areaCode && res.getParkingSpot().getSpotNumber() == spotNumber && res.getStatus() == Status.ACTIVE).
                 findFirst().orElse(null);
 
         if (reservation == null) {
-            throw new IllegalArgumentException("Parking spot is not taken or does not exist.");
+            throw new IllegalArgumentException("Parking spot is unoccupied or does not exist.");
         } else if (!reservation.getParkingSpot().isOccupied()) {
             throw new IllegalArgumentException("Parking spot is not occupied.");
         }

@@ -132,11 +132,11 @@ public class ParkingAppUI {
             int result=JOptionPane.showConfirmDialog(jFrame,panel,"Reserve Parking Spot",JOptionPane.OK_CANCEL_OPTION,JOptionPane.PLAIN_MESSAGE);
             if(result==JOptionPane.OK_OPTION){
                 try {
-                    Customer customer = customerService.getCustomer(Integer.parseInt(customerField.getText()));
+                    int customerId = Integer.parseInt(customerField.getText());
                     int duration = Integer.parseInt(durationField.getText());
                     int areaCode = Integer.parseInt(areaCodeField.getText());
                     int spotNumber = Integer.parseInt(spotNumberField.getText());
-                    reservationService.reserveSpot(customer.getId(), duration, areaCode, spotNumber);
+                    reservationService.reserveSpot(customerId, duration, areaCode, spotNumber);
                     JOptionPane.showMessageDialog(jFrame,"The Spot has been reserved successfully");
                 }
                 catch(Exception ex){

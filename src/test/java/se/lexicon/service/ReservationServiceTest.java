@@ -1,6 +1,7 @@
 package se.lexicon.service;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import se.lexicon.dao.CustomerDao;
@@ -30,6 +31,7 @@ class ReservationServiceTest {
     }
 
     @Test
+    @DisplayName("A reservation should be successful after creation with valid params")
     void shouldReserveSuccessfully_whenCostumerAndSpotExists() {
         // Arrange
         Customer customer = new Customer("name", "123", "ABC");
@@ -42,8 +44,8 @@ class ReservationServiceTest {
         assertEquals(Status.ACTIVE, reservation.getStatus());
     }
 
-    // parking spot taken
     @Test
+    @DisplayName("An exception should be thrown if a parking lot is taken")
     void shouldThrow_whenSpotTaken() {
         // Arrange
         ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
@@ -59,8 +61,8 @@ class ReservationServiceTest {
         assertThrows(IllegalArgumentException.class, action, "Should throw when parking spot taken.");
     }
 
-    // non-existing customer
     @Test
+    @DisplayName("An exception should be thrown if reserving is made with a non-existing customer")
     void shouldThrow_whenCustomerInvalid() {
         // Arrange
         Customer customer = new Customer("name", "123", "ABC");
@@ -72,8 +74,8 @@ class ReservationServiceTest {
         assertThrows(NoSuchElementException.class, action, "Should throw when customer don't exist.");
     }
 
-    // customer already made reservation
     @Test
+    @DisplayName("An exception should be thrown if the customer already made a reservation")
     void shouldThrow_whenCustomerHaveActiveReservation() {
         // Arrange
         ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
@@ -87,8 +89,8 @@ class ReservationServiceTest {
         assertThrows(IllegalArgumentException.class, action, "Should throw when customer have an active reservation.");
     }
 
-    // non-existing parking spot
     @Test
+    @DisplayName("An exception should be thrown if reserving is made with a non-existing parking spot")
     void shouldThrow_whenNonExistingSpot() {
         // Arrange
         ParkingSpot parkingSpot = new ParkingSpot(1, 101, false);
@@ -100,8 +102,8 @@ class ReservationServiceTest {
         assertThrows(IllegalArgumentException.class, action, "Should throw when parking spot don't exist.");
     }
 
-    // 0 or negative duration
     @Test
+    @DisplayName("An exception should be thrown if reserving is made with a non-positive duration")
     void shouldThrow_whenNonPositiveDuration() {
         // Arrange
         Customer customer = new Customer("name", "123", "ABC");
@@ -116,6 +118,7 @@ class ReservationServiceTest {
     }
 
     @Test
+    @DisplayName("A reservation should be successful after repeated reserve & vacate actions")
     void shouldReserveSuccessfully_whenCostumerVacatePrevious() {
         // Arrange
         Customer customer = new Customer("name", "123", "ABC");
